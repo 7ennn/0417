@@ -7,8 +7,7 @@
 ## 展示影片
 
 您可以透過以下連結觀看專案展示影片：
-- [專案展示影片（Google Drive）](https://drive.google.com/file/d/xxx)
-> 註：請確保您有權限存取此連結。如果連結無效，請聯繫專案維護者。
+- [專案展示影片（Google Drive）](https://drive.google.com/drive/folders/1dmF9loJQl3vcYIVj7VHHqo69r9oNPpRO?usp=drive_link)
 
 ## 主要功能
 
