@@ -212,6 +212,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
+
+        // 繪製所有粒子之間的連線（跨組連線）
+        const maxDist = 100; // 增加連線距離
+        const allParticles = [];
+        
+        // 收集所有粒子
+        particleGroups.forEach(particles => {
+            allParticles.push(...particles);
+        });
+        randomParticleGroups.forEach(particles => {
+            allParticles.push(...particles);
+        });
+
+        // 繪製所有粒子之間的連線
+        for (let i = 0; i < allParticles.length; i++) {
+            for (let j = i + 1; j < allParticles.length; j++) {
+                const dx = allParticles[i].x - allParticles[j].x;
+                const dy = allParticles[i].y - allParticles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < maxDist) {
+                    // 使用正弦函數讓透明度隨時間變化
+                    const baseAlpha = 1 - dist / maxDist;
+                    const pulseAlpha = baseAlpha * (0.3 + Math.sin(time * 2) * 0.1);
+                    
+                    // 根據距離動態調整線條寬度
+                    const lineWidth = (1 - dist / maxDist) * 1.5;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(allParticles[i].x, allParticles[i].y);
+                    ctx.lineTo(allParticles[j].x, allParticles[j].y);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${pulseAlpha})`;
+                    ctx.lineWidth = lineWidth;
+                    ctx.stroke();
+                }
+            }
+        }
     }
 
     function updateParticleCount() {
